@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Management System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="logo">
+                <i class="fas fa-wrench"></i>
+            </div>
+            <button class="nav-btn active" onclick="showSection('dashboard')">
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard
+            </button>
+            <button class="nav-btn" onclick="showSection('tools')">
+                <i class="fas fa-tools"></i>
+                Tools
+            </button>
+            <button class="nav-btn" onclick="showSection('suppliers')">
+                <i class="fas fa-truck"></i>
+                Suppliers
+            </button>
+            <button class="nav-btn" onclick="showSection('customers')">
+                <i class="fas fa-users"></i>
+                Customers
+            </button>
+            <button class="nav-btn" onclick="showSection('sales')">
+                <i class="fas fa-chart-line"></i>
+                Sales
+            </button>
+            <button class="nav-btn" onclick="showSection('rentals')">
+                <i class="fas fa-calendar-alt"></i>
+                Rentals
+            </button>
+            <button class="nav-btn" onclick="showSection('reports')">
+                <i class="fas fa-file-alt"></i>
+                Reports
+            </button>
+        </div>
+        <div class="nav-right">
+            <h1 class="system-title">Tool Management System</h1>
+            <div class="user-profile">
+                <span>Admin User</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard" class="section active">
+        <div class="section-header">
+            <h2><span class="dot purple"></span> Dashboard</h2>
+        </div>
+        
+        <!-- KPI Cards -->
+        <div class="kpi-cards">
+            <div class="kpi-card blue">
+                <div class="kpi-icon">
+                    <i class="fas fa-toolbox"></i>
+                </div>
+                <div class="kpi-content">
+                    <h3>Total Tools</h3>
+                    <p id="totalTools">0</p>
+                </div>
+            </div>
+            <div class="kpi-card red">
+                <div class="kpi-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="kpi-content">
+                    <h3>Low Stock Alerts</h3>
+                    <p id="lowStockCount">0</p>
+                </div>
+            </div>
+            <div class="kpi-card green">
+                <div class="kpi-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="kpi-content">
+                    <h3>Today's Sales</h3>
+                    <p id="todaySales">$0.00</p>
+                </div>
+            </div>
+            <div class="kpi-card orange">
+                <div class="kpi-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="kpi-content">
+                    <h3>Overdue Rentals</h3>
+                    <p id="overdueRentals">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Low Stock Alerts -->
+            <div class="content-panel">
+                <div class="panel-header">
+                    <h3><span class="dot red"></span> Low Stock Alerts</h3>
+                </div>
+                <div class="panel-content" id="lowStockAlerts">
+                    <div class="no-data">No low stock alerts</div>
+                </div>
+            </div>
+
+            <!-- Overdue Rentals -->
+            <div class="content-panel">
+                <div class="panel-header">
+                    <h3><span class="dot orange"></span> Overdue Rentals</h3>
+                </div>
+                <div class="panel-content" id="overdueRentalsList">
+                    <div class="no-data">No overdue rentals</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tools Section -->
+    <div id="tools" class="section">
+        <div class="section-header">
+            <h2><span class="dot blue"></span> Tools Management</h2>
+            <button class="add-btn" onclick="openModal('tool')">
+                <i class="fas fa-plus"></i> Add Tool
+            </button>
+        </div>
+        
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Stock</th>
+                        <th>Min Stock</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="toolsTableBody">
+                    <!-- Tools will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Suppliers Section -->
+    <div id="suppliers" class="section">
+        <div class="section-header">
+            <h2><span class="dot green"></span> Suppliers Management</h2>
+            <button class="add-btn" onclick="openModal('supplier')">
+                <i class="fas fa-plus"></i> Add Supplier
+            </button>
+        </div>
+        
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="suppliersTableBody">
+                    <!-- Suppliers will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Customers Section -->
+    <div id="customers" class="section">
+        <div class="section-header">
+            <h2><span class="dot purple"></span> Customers Management</h2>
+            <button class="add-btn" onclick="openModal('customer')">
+                <i class="fas fa-plus"></i> Add Customer
+            </button>
+        </div>
+        
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="customersTableBody">
+                    <!-- Customers will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Sales Section -->
+    <div id="sales" class="section">
+        <div class="section-header">
+            <h2><span class="dot green"></span> Sales Management</h2>
+            <button class="add-btn" onclick="openModal('sale')">
+                <i class="fas fa-plus"></i> Add Sale
+            </button>
+        </div>
+        
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="salesTableBody">
+                    <!-- Sales will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Rentals Section -->
+    <div id="rentals" class="section">
+        <div class="section-header">
+            <h2><span class="dot orange"></span> Rentals Management</h2>
+            <button class="add-btn" onclick="openModal('rental')">
+                <i class="fas fa-plus"></i> Add Rental
+            </button>
+        </div>
+        
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Tool</th>
+                        <th>Start Date</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="rentalsTableBody">
+                    <!-- Rentals will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Reports Section -->
+    <div id="reports" class="section">
+        <div class="section-header">
+            <h2><span class="dot blue"></span> Reports</h2>
+        </div>
+        
+        <div class="reports-grid">
+            <div class="report-card">
+                <h3>Sales Report</h3>
+                <p>View detailed sales analytics</p>
+                <button class="report-btn" onclick="generateReport('sales')">Generate</button>
+            </div>
+            <div class="report-card">
+                <h3>Inventory Report</h3>
+                <p>Current stock levels and alerts</p>
+                <button class="report-btn" onclick="generateReport('inventory')">Generate</button>
+            </div>
+            <div class="report-card">
+                <h3>Rental Report</h3>
+                <p>Rental history and overdue items</p>
+                <button class="report-btn" onclick="generateReport('rentals')">Generate</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Item</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <form id="modalForm" onsubmit="handleFormSubmit(event)" method="post">
+                <div id="modalFields">
+                    <!-- Form fields will be dynamically generated -->
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
